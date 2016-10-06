@@ -6,8 +6,7 @@ import flixel.FlxG;
 import sprites.Player;
 import sprites.Disparo;
 
- class Reg
+class Reg
 {
-	 static public var disparo:Disparo;
-	
+	 static public var arrDisparo:Array<Disparo> = new Array<Disparo>();
 }

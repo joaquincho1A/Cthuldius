@@ -511,7 +511,7 @@ class ApplicationMain {
 		
 		config = {
 			
-			build: "23",
+			build: "46",
 			company: "HaxeFlixel",
 			file: "OgmoLoco",
 			fps: 60,

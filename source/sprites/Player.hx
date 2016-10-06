@@ -10,12 +10,15 @@ import flixel.FlxG;
  */
 class Player extends FlxSprite
 {
+	private var puedeDisparar:Bool;
+	private var counterDisparos:Int;
 
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{
 		super(X, Y, SimpleGraphic);
-		makeGraphic(32,32);
-		
+		makeGraphic(32, 32);
+		puedeDisparar = true;
+		counterDisparos = 0;
 	}
 	override public function update(elapsed:Float):Void
 	{
@@ -28,14 +31,20 @@ class Player extends FlxSprite
 			y -= 150 * FlxG.elapsed;
 		if (FlxG.keys.pressed.DOWN)
 			y += 150 * FlxG.elapsed;
-		if (FlxG.keys.pressed.SPACE)
-			Reg.disparo = new Disparo();
-			Reg.disparo.x = this.x + 32;
-			Reg.disparo.y = this.y;
-			FlxG.state.add(Reg.disparo);
+		if (FlxG.keys.pressed.SPACE && puedeDisparar)
+		{
+			Reg.arrDisparo.push(new Disparo(this.x + 32, this.y));
+			FlxG.state.add(Reg.arrDisparo[Reg.arrDisparo.length - 1]);
+			puedeDisparar = false;
+			counterDisparos = 0;
+		}
+		if (!puedeDisparar)
+			counterDisparos++;
+		if (counterDisparos == 10)
+			puedeDisparar = true;
 		if (y > (FlxG.height - this.height))
 			y = (FlxG.height - this.height)
-			else if (y < 0)
-				y = 0;
+		else if (y < 0)
+			y = 0;
 	}
 }
