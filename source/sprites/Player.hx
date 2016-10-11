@@ -16,12 +16,19 @@ class Player extends FlxSprite
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{
 		super(X, Y, SimpleGraphic);
-		makeGraphic(32, 32);
+		//makeGraphic(32, 32);
+		loadGraphic(AssetPaths.NewPiskel__png);
+		
 		puedeDisparar = true;
 		counterDisparos = 0;
+		
 	}
 	override public function update(elapsed:Float):Void
 	{
+		if (Reg.colisionJugador)
+			destroy();
+		//x += 1;
+		
 		super.update(elapsed);
 		if (FlxG.keys.pressed.LEFT)
 			x -= 150 * FlxG.elapsed;
@@ -33,8 +40,8 @@ class Player extends FlxSprite
 			y += 150 * FlxG.elapsed;
 		if (FlxG.keys.pressed.SPACE && puedeDisparar)
 		{
-			Reg.arrDisparo.push(new Disparo(this.x + 32, this.y));
-			FlxG.state.add(Reg.arrDisparo[Reg.arrDisparo.length - 1]);
+			Reg.disparoGroup.add(new Disparo(this.x + width, this.y + height/2));
+			FlxG.state.add(Reg.disparoGroup);
 			puedeDisparar = false;
 			counterDisparos = 0;
 		}
@@ -46,5 +53,6 @@ class Player extends FlxSprite
 			y = (FlxG.height - this.height)
 		else if (y < 0)
 			y = 0;
+			
 	}
 }

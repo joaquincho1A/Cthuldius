@@ -20,6 +20,12 @@ class AssetData {
 			type.set ("assets/data/gradius.oep", Reflect.field (AssetType, "text".toUpperCase ()));
 			path.set ("assets/data/level1.oel", "assets/data/level1.oel");
 			type.set ("assets/data/level1.oel", Reflect.field (AssetType, "text".toUpperCase ()));
+			path.set ("assets/images/NewPiskel (2).png", "assets/images/NewPiskel (2).png");
+			type.set ("assets/images/NewPiskel (2).png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/images/NewPiskel.png", "assets/images/NewPiskel.png");
+			type.set ("assets/images/NewPiskel.png", Reflect.field (AssetType, "image".toUpperCase ()));
+			path.set ("assets/images/Sin título-1.jpg", "assets/images/Sin título-1.jpg");
+			type.set ("assets/images/Sin título-1.jpg", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("assets/images/tiles.png", "assets/images/tiles.png");
 			type.set ("assets/images/tiles.png", Reflect.field (AssetType, "image".toUpperCase ()));
 			path.set ("flixel/sounds/beep.ogg", "flixel/sounds/beep.ogg");

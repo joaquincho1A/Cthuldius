@@ -61,6 +61,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
+		
+		
+		
 		Font.registerFont (__ASSET__flixel_fonts_nokiafc22_ttf);
 		Font.registerFont (__ASSET__flixel_fonts_monsterrat_ttf);
 		
@@ -69,6 +72,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#if (windows || mac || linux)
 		
 		var useManifest = false;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
 		useManifest = true;
 		useManifest = true;
 		useManifest = true;
@@ -574,6 +580,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		
 		
 		
+		
+		
+		
 		openfl.text.Font.registerFont (__ASSET__OPENFL__flixel_fonts_nokiafc22_ttf);
 		openfl.text.Font.registerFont (__ASSET__OPENFL__flixel_fonts_monsterrat_ttf);
 		
@@ -586,6 +595,12 @@ class DefaultAssetLibrary extends AssetLibrary {
 		type.set ("assets/data/gradius.oep", AssetType.TEXT);
 		path.set ("assets/data/level1.oel", "assets/data/level1.oel");
 		type.set ("assets/data/level1.oel", AssetType.TEXT);
+		path.set ("assets/images/NewPiskel (2).png", "assets/images/NewPiskel (2).png");
+		type.set ("assets/images/NewPiskel (2).png", AssetType.IMAGE);
+		path.set ("assets/images/NewPiskel.png", "assets/images/NewPiskel.png");
+		type.set ("assets/images/NewPiskel.png", AssetType.IMAGE);
+		path.set ("assets/images/Sin título-1.jpg", "assets/images/Sin título-1.jpg");
+		type.set ("assets/images/Sin título-1.jpg", AssetType.IMAGE);
 		path.set ("assets/images/tiles.png", "assets/images/tiles.png");
 		type.set ("assets/images/tiles.png", AssetType.IMAGE);
 		className.set ("flixel/sounds/beep.ogg", __ASSET__flixel_sounds_beep_ogg);
@@ -609,6 +624,15 @@ class DefaultAssetLibrary extends AssetLibrary {
 		id = "assets/data/level1.oel";
 		path.set (id, id);
 		type.set (id, AssetType.TEXT);
+		id = "assets/images/NewPiskel (2).png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/NewPiskel.png";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
+		id = "assets/images/Sin título-1.jpg";
+		path.set (id, id);
+		type.set (id, AssetType.IMAGE);
 		id = "assets/images/tiles.png";
 		path.set (id, id);
 		type.set (id, AssetType.IMAGE);
@@ -649,6 +673,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 		#if (windows || mac || linux)
 		
 		var useManifest = false;
+		useManifest = true;
+		useManifest = true;
+		useManifest = true;
 		useManifest = true;
 		useManifest = true;
 		useManifest = true;
@@ -1388,6 +1415,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 
+
+
+
 @:keep @:bind #if display private #end class __ASSET__flixel_sounds_beep_ogg extends null { }
 @:keep @:bind #if display private #end class __ASSET__flixel_sounds_flixel_ogg extends null { }
 @:keep @:bind #if display private #end class __ASSET__flixel_fonts_nokiafc22_ttf extends null { }
@@ -1396,6 +1426,9 @@ class DefaultAssetLibrary extends AssetLibrary {
 
 
 #elseif html5
+
+
+
 
 
 

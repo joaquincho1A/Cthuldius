@@ -7,9 +7,11 @@ import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.math.FlxMath;
 import flixel.system.FlxAssets.FlxGraphicAsset;
+import sprites.Enemy1;
 import sprites.Player;
 import flixel.addons.editors.ogmo.FlxOgmoLoader;
 import flixel.tile.FlxTilemap;
+import flixel.FlxObject;
 
 class PlayState extends FlxState
 {
@@ -24,11 +26,25 @@ class PlayState extends FlxState
 		player = new Player();
 		add(player);
 		super.create();
+		tilemap.setTileProperties(0, FlxObject.NONE);
+		tilemap.setTileProperties(1, FlxObject.NONE);
+		tilemap.setTileProperties(2, FlxObject.ANY);
+		FlxG.worldBounds.set(0, 0, tilemap.width, tilemap.height);
+		FlxG.camera.setScrollBounds(0, tilemap.width, 0, tilemap.height);
+		
+		Reg.enemiesGroup.add(new Enemy1(200, 50));
+		Reg.enemiesGroup.add(new Enemy1(220, 50));
+		Reg.enemiesGroup.add(new Enemy1(240, 50));
+		add(Reg.enemiesGroup);
+		//var enemi:Enemy1 = new Enemy1(200, 50);
+		//add(enemi);
 	}
 
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
-		tilemap.x -= 0.5;
+		//FlxG.camera.scroll.x += 1;
+		//if (FlxG.collide(tilemap, player))
+	
 	}
 }

@@ -1,27 +1,25 @@
 package sprites;
 
 import flixel.FlxSprite;
-import flixel.FlxG;
 import flixel.system.FlxAssets.FlxGraphicAsset;
-
+import flixel.FlxG;
 /**
  * ...
  * @author ...
  */
-class Disparo extends FlxSprite
+class BaseEnemies extends FlxSprite
 {
 
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{
 		super(X, Y, SimpleGraphic);
-		makeGraphic(4, 4);
-		color = 0xFF0000;
-		velocity.x = 200;
+		makeGraphic(10, 10);		
 	}
 	override public function update(elapsed:Float):Void
 	{
-		super.update(elapsed);
-		if (FlxG.overlap(this, Reg.enemiesGroup))
+		if (FlxG.overlap(this, Reg.disparoGroup))
 			destroy();
+		move();
 	}
+	public function move(){};
 }
