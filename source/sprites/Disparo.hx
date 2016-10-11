@@ -21,7 +21,9 @@ class Disparo extends FlxSprite
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
-		if (FlxG.overlap(this, Reg.enemiesGroup))
+		//if (FlxG.overlap(this, Reg.enemiesGroup))
+			//destroy();
+		 if (this.x > FlxG.camera.scroll.x + FlxG.camera.width)
 			destroy();
 	}
 }

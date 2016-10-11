@@ -17,7 +17,9 @@ class BaseEnemies extends FlxSprite
 	}
 	override public function update(elapsed:Float):Void
 	{
-		if (FlxG.overlap(this, Reg.disparoGroup))
+		if (this.x > (FlxG.camera.scroll.x + FlxG.camera.width + this.width*2))
+			destroy();
+		else if (this.x < (FlxG.camera.scroll.x - this.width * 2))
 			destroy();
 		move();
 	}

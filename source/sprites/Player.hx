@@ -25,10 +25,9 @@ class Player extends FlxSprite
 	}
 	override public function update(elapsed:Float):Void
 	{
-		if (Reg.colisionJugador)
-			destroy();
 		//x += 1;
-		
+		Reg.posXplayer = x+width/2;
+		Reg.posYplayer = y+height/2;
 		super.update(elapsed);
 		if (FlxG.keys.pressed.LEFT)
 			x -= 150 * FlxG.elapsed;
@@ -54,5 +53,9 @@ class Player extends FlxSprite
 		else if (y < 0)
 			y = 0;
 			
+		if (x > (FlxG.camera.scroll.x + FlxG.camera.width - this.width))
+			x = FlxG.camera.scroll.x + FlxG.camera.width - this.width;
+		else if (x < FlxG.camera.scroll.x)
+			x = FlxG.camera.scroll.x;
 	}
 }

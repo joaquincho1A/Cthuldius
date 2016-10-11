@@ -15,5 +15,6 @@ class Reg
 	
 	static public var enemiesGroup:FlxTypedGroup<BaseEnemies> = new FlxTypedGroup<BaseEnemies>();
 	
-	static public var colisionJugador:Bool = false;
+	static public var posXplayer:Float;
+	static public var posYplayer:Float;
 }

@@ -6,9 +6,9 @@ import flixel.system.FlxAssets.FlxGraphicAsset;
  * ...
  * @author ...
  */
-class Enemy1 extends BaseEnemies
+class Enemy2 extends BaseEnemies
 {
-	var etapa:Int = 1;
+	var etapa:Bool = true;
 	var movimiento:Int = 0;
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{
@@ -18,32 +18,21 @@ class Enemy1 extends BaseEnemies
 	override public function move() 
 	{
 		super.move();
-		if (etapa == 1)
+		x --;
+		if (etapa)
 		{
-			x -=2;
+			y -= 2;
 			movimiento++;
 		}
-		else if (etapa == 2)
+		else if (!etapa)
 		{
-			y++;
-			x++;
-			movimiento++;
-		}
-		
-		else if (etapa == 3)
-		{
-			x+=3;
+			y += 2;
 			movimiento++;
 		}
 
-		if (movimiento == 80 && etapa == 1)
+		if (movimiento == 20)
 		{
-			etapa++;
-			movimiento = 0;
-		}
-		else if (movimiento == 50 && etapa == 2)
-		{
-			etapa++;
+			etapa = !etapa;
 			movimiento = 0;
 		}
 	}
