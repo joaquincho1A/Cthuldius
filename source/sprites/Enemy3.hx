@@ -25,7 +25,7 @@ class Enemy3 extends BaseEnemies
 		if (y == Reg.posYplayer)
 			x -= 2;
 		else
-		 x-= 0,5;
+		 x-= 0.5;
 		
 		
 		

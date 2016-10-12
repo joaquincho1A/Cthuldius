@@ -10,6 +10,7 @@ import flixel.system.FlxAssets.FlxGraphicAsset;
 import sprites.Enemy1;
 import sprites.Enemy2;
 import sprites.Enemy3;
+import sprites.Enemy4;
 import sprites.Player;
 import flixel.addons.editors.ogmo.FlxOgmoLoader;
 import flixel.tile.FlxTilemap;
@@ -35,7 +36,7 @@ class PlayState extends FlxState
 		FlxG.worldBounds.set(0, 0, tilemap.width, tilemap.height);
 		FlxG.camera.setScrollBounds(0, tilemap.width, 0, tilemap.height);
 		
-		Reg.enemiesGroup.add(new Enemy3(FlxG.camera.scroll.x+FlxG.camera.width, 50));
+		Reg.enemiesGroup.add(new Enemy4(FlxG.camera.scroll.x+FlxG.camera.width, 50));
 		//Reg.enemiesGroup.add(new Enemy1(220, 50));
 		//Reg.enemiesGroup.add(new Enemy1(240, 50));
 		add(Reg.enemiesGroup);
@@ -47,10 +48,30 @@ class PlayState extends FlxState
 	{
 		super.update(elapsed);
 		
-		//FlxG.camera.scroll.x += 1;
+		FlxG.camera.scroll.x += 1;
 		
 		if (FlxG.collide(tilemap, player))
 			player.destroy();
+		
+		for (i in 0...Reg.disparoGroup.length)
+			if (FlxG.collide(tilemap, Reg.disparoGroup.members[i]))
+				Reg.disparoGroup.members[i].destroy();
+		
+		for (i in 0...Reg.disparoGroup.length)
+		{
+			for (j in 0...Reg.enemyDisparoGroup.length)
+			{
+				if (FlxG.collide(Reg.disparoGroup.members[i], Reg.enemyDisparoGroup.members[j]))
+				{	
+					Reg.disparoGroup.members[i].destroy();
+					Reg.enemyDisparoGroup.members[j].destroy();
+				}
+			}
+		}
+		
+		for (i in 0...Reg.enemyDisparoGroup.length)
+			if (FlxG.collide(tilemap, Reg.enemyDisparoGroup.members[i]))
+				Reg.enemyDisparoGroup.members[i].destroy();
 		
 		for (i in 0...Reg.disparoGroup.length) 
 		{

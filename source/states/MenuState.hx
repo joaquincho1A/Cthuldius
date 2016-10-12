@@ -15,10 +15,6 @@ class MenuState extends FlxState
 	{
 		super.create();
 		
-		/*var loader:FlxOgmoLoader = new FlxOgmoLoader(AssetPaths.level1__oel);
-		tilemap = loader.loadTilemap(AssetPaths.tiles__png, 16, 16, "tiles");
-		
-		add(tilemap);*/
 	}
 
 	override public function update(elapsed:Float):Void
