@@ -20,19 +20,25 @@ class PlayState extends FlxState
 {
 	private var tilemap:FlxTilemap;
 	private var player:Player;
-	
+	private var fondo:FlxSprite;
 	override public function create():Void
 	{
-		var loader:FlxOgmoLoader = new FlxOgmoLoader(AssetPaths.level1__oel);
-		tilemap = loader.loadTilemap(AssetPaths.tiles__png, 16, 16, "tiles");
+		var loader:FlxOgmoLoader = new FlxOgmoLoader(AssetPaths.oceantile__oel);
+		tilemap = loader.loadTilemap(AssetPaths.Oceantileset__png, 16, 16, "tileset");
+		//tilemap = loader.loadTilemap(AssetPaths.mar__png, 240, 75, "fondo");
+		
+		
 		
 		add(tilemap);
-		player = new Player();
+		player = new Player(80,0);
 		add(player);
 		super.create();
 		tilemap.setTileProperties(0, FlxObject.NONE);
 		tilemap.setTileProperties(1, FlxObject.NONE);
 		tilemap.setTileProperties(2, FlxObject.ANY);
+		for (i in 3...20) 
+			tilemap.setTileProperties(i, FlxObject.ANY);			
+
 		FlxG.worldBounds.set(0, 0, tilemap.width, tilemap.height);
 		FlxG.camera.setScrollBounds(0, tilemap.width, 0, tilemap.height);
 		

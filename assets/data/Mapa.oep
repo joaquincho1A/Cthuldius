@@ -16,7 +16,7 @@
     <Width>25600</Width>
     <Height>10000</Height>
   </LevelMaximumSize>
-  <Filename>C:\Users\113\Desktop\Cthuldius\Mapa.oep</Filename>
+  <Filename>C:\Users\820\Desktop\Cthuldius\assets\data\Mapa.oep</Filename>
   <AngleMode>Radians</AngleMode>
   <CameraEnabled>true</CameraEnabled>
   <CameraSize>
@@ -38,22 +38,11 @@
       </ScrollFactor>
       <ExportMode>CSV</ExportMode>
     </LayerDefinition>
-    <LayerDefinition xsi:type="EntityLayerDefinition">
-      <Name>PlayerLayer</Name>
-      <Grid>
-        <Width>32</Width>
-        <Height>32</Height>
-      </Grid>
-      <ScrollFactor>
-        <X>1</X>
-        <Y>1</Y>
-      </ScrollFactor>
-    </LayerDefinition>
   </LayerDefinitions>
   <Tilesets>
     <Tileset>
       <Name>OceanTiles</Name>
-      <FilePath>Ocean tileset.png</FilePath>
+      <FilePath>..\..\OgmoThings\OceanTileset.png</FilePath>
       <TileSize>
         <Width>16</Width>
         <Height>16</Height>
@@ -61,21 +50,5 @@
       <TileSep>0</TileSep>
     </Tileset>
   </Tilesets>
-  <EntityDefinitions>
-    <EntityDefinition Name="Player" Limit="-1" ResizableX="false" ResizableY="false" Rotatable="false" RotateIncrement="15">
-      <Size>
-        <Width>32</Width>
-        <Height>32</Height>
-      </Size>
-      <Origin>
-        <X>0</X>
-        <Y>0</Y>
-      </Origin>
-      <ImageDefinition DrawMode="Image" ImagePath="assets\images\NewPiskel.png" Tiled="false">
-        <RectColor A="255" R="255" G="0" B="0" />
-      </ImageDefinition>
-      <ValueDefinitions />
-      <NodesDefinition Enabled="false" Limit="-1" DrawMode="None" Ghost="false" />
-    </EntityDefinition>
-  </EntityDefinitions>
+  <EntityDefinitions />
 </project>

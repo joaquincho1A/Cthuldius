@@ -16,7 +16,6 @@ class Player extends FlxSprite
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{
 		super(X, Y, SimpleGraphic);
-		//makeGraphic(32, 32);
 		loadGraphic(AssetPaths.NewPiskel__png);
 		
 		puedeDisparar = true;
@@ -25,7 +24,7 @@ class Player extends FlxSprite
 	}
 	override public function update(elapsed:Float):Void
 	{
-		//x += 1;
+		x += 1;
 		Reg.posXplayer = x+width/2;
 		Reg.posYplayer = y+height/2;
 		super.update(elapsed);
