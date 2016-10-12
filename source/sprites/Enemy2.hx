@@ -14,6 +14,9 @@ class Enemy2 extends BaseEnemies
 	{
 		super(X, Y, SimpleGraphic);
 		
+		loadGraphic(AssetPaths.Tiburon2__png, true, 32, 13);
+		animation.add("idle", [0, 1], 4, true);
+		animation.play("idle");
 	}
 	override public function move() 
 	{

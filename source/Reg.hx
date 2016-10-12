@@ -8,6 +8,7 @@ import sprites.BaseEnemies;
 import sprites.Player;
 import sprites.Disparo;
 import sprites.EnemyDisparo;
+import sprites.PowerUp;
 
 
 class Reg
@@ -18,6 +19,10 @@ class Reg
 	
 	static public var enemyDisparoGroup:FlxTypedGroup<EnemyDisparo> = new FlxTypedGroup<EnemyDisparo>();
 	
+	static public var powerUpGroup:FlxTypedGroup<PowerUp> = new FlxTypedGroup<PowerUp>();
+	
 	static public var posXplayer:Float;
 	static public var posYplayer:Float;
+	static public var widthPlayer:Float;
+	static public var heightPlayer:Float;
 }

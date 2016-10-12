@@ -12,7 +12,9 @@ class Enemy3 extends BaseEnemies
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{
 		super(X, Y, SimpleGraphic);
-		
+		loadGraphic(AssetPaths.Tortuga__png, true, 32, 32);
+		animation.add("idle", [0, 1], 4, true);
+		animation.play("idle");
 	}
 	override public function move() 
 	{
@@ -26,38 +28,5 @@ class Enemy3 extends BaseEnemies
 			x -= 2;
 		else
 		 x-= 0.5;
-		
-		
-		
-		
-		
-		//if (etapa == 1)
-		//{
-			//x -=2;
-			//movimiento++;
-		//}
-		//else if (etapa == 2)
-		//{
-			//y++;
-			//x++;
-			//movimiento++;
-		//}
-		//
-		//else if (etapa == 3)
-		//{
-			//x+=3;
-			//movimiento++;
-		//}
-//
-		//if (movimiento == 80 && etapa == 1)
-		//{
-			//etapa++;
-			//movimiento = 0;
-		//}
-		//else if (movimiento == 50 && etapa == 2)
-		//{
-			//etapa++;
-			//movimiento = 0;
-		//}
 	}
 }

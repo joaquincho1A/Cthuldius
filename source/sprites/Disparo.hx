@@ -10,20 +10,32 @@ import flixel.system.FlxAssets.FlxGraphicAsset;
  */
 class Disparo extends FlxSprite
 {
-
-	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
+	private var tipo:Int;
+	public function new(_tipo:Int,?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{
 		super(X, Y, SimpleGraphic);
 		makeGraphic(4, 4);
-		color = 0xFF0000;
-		velocity.x = 200;
+		tipo = _tipo;
+		
+		switch(tipo)
+		{
+			case 1:
+				{
+					velocity.x = 300;
+					color = 0xFF0000;
+				}
+			case 2:
+				{
+					velocity.x = 300;
+					velocity.y = 300;
+					color = 0x00FF00;
+				}
+		}
 	}
 	override public function update(elapsed:Float):Void
 	{
 		super.update(elapsed);
-		//if (FlxG.overlap(this, Reg.enemiesGroup))
-			//destroy();
-		 if (this.x > FlxG.camera.scroll.x + FlxG.camera.width)
+		if (this.x > FlxG.camera.scroll.x + FlxG.camera.width)
 			destroy();
 	}
 }

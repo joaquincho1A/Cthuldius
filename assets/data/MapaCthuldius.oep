@@ -16,7 +16,7 @@
     <Width>25600</Width>
     <Height>24000</Height>
   </LevelMaximumSize>
-  <Filename>C:\Users\820\Desktop\Cthuldius\assets\data\MapaCthuldius.oep</Filename>
+  <Filename>C:\Users\Pc\Desktop\Image\Proyectos\OgmoLoco\assets\data\MapaCthuldius.oep</Filename>
   <AngleMode>Radians</AngleMode>
   <CameraEnabled>true</CameraEnabled>
   <CameraSize>
@@ -26,6 +26,18 @@
   <ExportCameraPosition>true</ExportCameraPosition>
   <LevelValueDefinitions />
   <LayerDefinitions>
+    <LayerDefinition xsi:type="TileLayerDefinition">
+      <Name>fondo</Name>
+      <Grid>
+        <Width>75</Width>
+        <Height>240</Height>
+      </Grid>
+      <ScrollFactor>
+        <X>1</X>
+        <Y>1</Y>
+      </ScrollFactor>
+      <ExportMode>CSV</ExportMode>
+    </LayerDefinition>
     <LayerDefinition xsi:type="TileLayerDefinition">
       <Name>tileset</Name>
       <Grid>
@@ -49,35 +61,23 @@
         <Y>1</Y>
       </ScrollFactor>
     </LayerDefinition>
-    <LayerDefinition xsi:type="TileLayerDefinition">
-      <Name>fondo</Name>
-      <Grid>
-        <Width>75</Width>
-        <Height>240</Height>
-      </Grid>
-      <ScrollFactor>
-        <X>1</X>
-        <Y>1</Y>
-      </ScrollFactor>
-      <ExportMode>CSV</ExportMode>
-    </LayerDefinition>
   </LayerDefinitions>
   <Tilesets>
+    <Tileset>
+      <Name>fondo</Name>
+      <FilePath>..\images\fondo.png</FilePath>
+      <TileSize>
+        <Width>75</Width>
+        <Height>240</Height>
+      </TileSize>
+      <TileSep>0</TileSep>
+    </Tileset>
     <Tileset>
       <Name>tilset</Name>
       <FilePath>..\images\OceanTileset.png</FilePath>
       <TileSize>
         <Width>16</Width>
         <Height>16</Height>
-      </TileSize>
-      <TileSep>0</TileSep>
-    </Tileset>
-    <Tileset>
-      <Name>fondo</Name>
-      <FilePath>..\images\mar.png</FilePath>
-      <TileSize>
-        <Width>75</Width>
-        <Height>240</Height>
       </TileSize>
       <TileSep>0</TileSep>
     </Tileset>
@@ -101,7 +101,7 @@
     <EntityDefinition Name="tiburon" Limit="-1" ResizableX="true" ResizableY="true" Rotatable="false" RotateIncrement="15">
       <Size>
         <Width>32</Width>
-        <Height>32</Height>
+        <Height>13</Height>
       </Size>
       <Origin>
         <X>0</X>

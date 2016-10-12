@@ -15,7 +15,11 @@ class Enemy4 extends BaseEnemies
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{
 		super(X, Y, SimpleGraphic);
-		
+		loadGraphic(AssetPaths.Cangrejo__png, true, 32, 32);
+		animation.add("idle", [0, 1], 4, true);
+		animation.play("idle");
+		scale.x = 0.7;
+		scale.y = 0.7;
 	}
 	override public function move() 
 	{

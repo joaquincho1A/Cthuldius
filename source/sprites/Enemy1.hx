@@ -13,14 +13,18 @@ class Enemy1 extends BaseEnemies
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{
 		super(X, Y, SimpleGraphic);
-		
+		loadGraphic(AssetPaths.Medusa__png, true, 32, 32);
+		animation.add("idle", [0, 1], 4, true);
+		animation.play("idle");
+		scale.x = 0.5;
+		scale.y = 0.5;
 	}
 	override public function move() 
 	{
 		super.move();
 		if (etapa == 1)
 		{
-			x -=2;
+			x -=1;
 			movimiento++;
 		}
 		else if (etapa == 2)
@@ -32,7 +36,7 @@ class Enemy1 extends BaseEnemies
 		
 		else if (etapa == 3)
 		{
-			x+=3;
+			x+=2;
 			movimiento++;
 		}
 
