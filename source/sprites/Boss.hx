@@ -15,15 +15,16 @@ class Boss extends FlxSprite
 	private var countMove:Int;
 	private var disparo:Int;
 	private var delayDisparo:Int;
+	private var vencido:Bool;
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{
 		super(X, Y, SimpleGraphic);
-		//makeGraphic(128, 128, 0xFFFF0000);
 		loadGraphic(AssetPaths.Ballena__png, false, 128, 128);
-		vida = 3;
+		vida = 30;
 		movimiento = true;
 		countMove = 0;
 		delayDisparo = 0;
+		vencido = false;
 		kill();
 	}
 	override public function update(elapsed:Float):Void 
@@ -65,5 +66,22 @@ class Boss extends FlxSprite
 				Reg.bossDisparoGroup.add(new Barriles(x, 190));
 				
 		}
+		for (i in 0...Reg.disparoGroup.length) 
+		{
+			if (FlxG.overlap(this, Reg.disparoGroup.members[i]))
+			{
+				Reg.disparoGroup.members[i].destroy();
+				vida--;
+			}
+		}
+		if (vida <= 0)	
+		{	
+			vencido = true;
+			kill();
+		}
+	}
+	public function getVencido():Bool
+	{
+		return vencido;
 	}
 }

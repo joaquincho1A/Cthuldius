@@ -57,7 +57,7 @@ class PlayState extends FlxState
 					Reg.enemiesGroup.members[i].revive();
 			}
 		}
-		if (boss.x <= (FlxG.camera.scroll.x + FlxG.camera.width + boss.width))
+		if (boss.x <= (FlxG.camera.scroll.x + FlxG.camera.width + boss.width) && !boss.getVencido())
 			boss.revive();
 	}
 	
@@ -86,11 +86,15 @@ class PlayState extends FlxState
 		Reg.powerUpGroup.add(new PowerUp(50,30));
 		Reg.powerUpGroup.add(new PowerUp(100,30));
 		Reg.powerUpGroup.add(new PowerUp(150,30));
-		Reg.powerUpGroup.add(new PowerUp(200,30));
+		Reg.powerUpGroup.add(new PowerUp(200, 60));
+		Reg.powerUpGroup.add(new PowerUp(200, 80));
+		Reg.powerUpGroup.add(new PowerUp(200, 100));
+		Reg.powerUpGroup.add(new PowerUp(200,140));
 		
 		add(Reg.powerUpGroup);
 		add(Reg.enemiesGroup);
 		add(Reg.bossDisparoGroup);
+		add(Reg.disparoGroup);
 		add(boss);
 		
 	}
@@ -99,7 +103,7 @@ class PlayState extends FlxState
 	{
 
 		super.update(elapsed);
-		FlxG.camera.scroll.x += 1;
+		//FlxG.camera.scroll.x += 1;
 		spawnEnemies();
 		
 		for (l in 0...Reg.enemiesGroup.length) 
@@ -110,23 +114,23 @@ class PlayState extends FlxState
 				Reg.enemiesGroup.members[l].destroy();
 			
 			}
-			else if (Reg.enemiesGroup.members[l].alive)
-				{
-					if (FlxG.pixelPerfectOverlap(Reg.enemiesGroup.members[l], player))
-						player.perder();
-				}
+			//else if (Reg.enemiesGroup.members[l].alive)
+				//{
+					//if (FlxG.pixelPerfectOverlap(Reg.enemiesGroup.members[l], player))
+						//player.perder();
+				//}
 		}
 		
 		if (FlxG.collide(tilemap, player))
 			player.perder();
-		for (m in 0...Reg.bossDisparoGroup.length) 
-		{
-			if (FlxG.pixelPerfectOverlap(Reg.bossDisparoGroup.members[m], player))
-			{
-				player.perder(); 
-				trace("perdio");
-			}
-		}
+		//for (m in 0...Reg.bossDisparoGroup.length) 
+		//{
+			//if (FlxG.pixelPerfectOverlap(Reg.bossDisparoGroup.members[m], player))
+			//{
+				//player.perder(); 
+				//trace("perdio");
+			//}
+		//}
 		for (i in 0...Reg.disparoGroup.length)
 			if (FlxG.collide(tilemap, Reg.disparoGroup.members[i]))
 				Reg.disparoGroup.members[i].kill();
@@ -156,16 +160,18 @@ class PlayState extends FlxState
 				}
 			}
 		}
-		for (k in 0...Reg.powerUpGroup.length) 
-		{
-			if (FlxG.overlap(player,Reg.powerUpGroup.members[k])) 
+		//for (k in 0...Reg.powerUpGroup.length) 
+		//{
+			//if (FlxG.overlap(player,Reg.powerUpGroup.members[k])) 
+			//{
+				//Reg.powerUpGroup.members[k].destroy();
+				//player.agarroPowerUp();
+			//}
+		//}
+		if (player.getVidas() == 0)
 			{
-				Reg.powerUpGroup.members[k].destroy();
-				player.agarroPowerUp();
+				FlxG.switchState(new MenuState());
 			}
-		}
-		if (player.checkPerdio())
-			trace("gameover");
 		
 	}
 }
