@@ -7,6 +7,7 @@ import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.math.FlxMath;
 import flixel.system.FlxAssets.FlxGraphicAsset;
+import sprites.Boss;
 import sprites.Enemy1;
 import sprites.Enemy2;
 import sprites.Enemy3;
@@ -23,14 +24,14 @@ class PlayState extends FlxState
 	private var tilemap2:FlxTilemap;
 	private var player:Player;
 	private var fondo:FlxSprite;
-	
+	private var aux:FlxSprite;
+	private var boss:Boss;
 	
 	private function entityCreator(name:String, data:Xml):Void
 	{
 		var startX:Float = Std.parseFloat(data.get("x"));
 		var startY:Float = Std.parseFloat(data.get("y"));
-		var indice:Int  = Std.parseInt(data.get("id"));
-		
+
 		switch (name)
 		{
 			case "medusa":
@@ -41,6 +42,8 @@ class PlayState extends FlxState
 				    Reg.enemiesGroup.add(new Enemy3(startX, startY));
 			case "cangrejo":
 					Reg.enemiesGroup.add(new Enemy4(startX, startY));
+			case "jefe":
+					boss = new Boss(startX, startY);
 		}
 	}
 	
@@ -48,38 +51,37 @@ class PlayState extends FlxState
 	{
 		for (i in 0...Reg.enemiesGroup.length) 
 		{
-			if (!Reg.enemiesGroup.members[i].alive) 
+			if (!Reg.enemiesGroup.members[i].alive && !Reg.enemiesGroup.members[i].checkKilled() ) 
 			{
 				if (Reg.enemiesGroup.members[i].x <= (FlxG.camera.scroll.x + FlxG.camera.width + Reg.enemiesGroup.members[i].width))
-				Reg.enemiesGroup.members[i].revive();
+					Reg.enemiesGroup.members[i].revive();
 			}
 		}
+		if (boss.x <= (FlxG.camera.scroll.x + FlxG.camera.width + boss.width))
+			boss.revive();
 	}
 	
 	
 	override public function create():Void
 	{
+		super.create();
 		var loader:FlxOgmoLoader = new FlxOgmoLoader(AssetPaths.oceantile__oel);
 		tilemap = loader.loadTilemap(AssetPaths.Oceantileset__png, 16, 16, "tileset");
 		tilemap2 = loader.loadTilemap(AssetPaths.fondo__png, 75, 240, "fondo");
-		
-		
-		add(tilemap2);
-		add(tilemap);
-		player = new Player(10,100);
-		add(player);
-		super.create();
 		tilemap.setTileProperties(0, FlxObject.NONE);
 		tilemap.setTileProperties(1, FlxObject.NONE);
 		tilemap.setTileProperties(2, FlxObject.ANY);
 		for (i in 3...20) 
 			tilemap.setTileProperties(i, FlxObject.ANY);			
-
 		FlxG.worldBounds.set(0, 0, tilemap.width, tilemap.height);
 		FlxG.camera.setScrollBounds(0, tilemap.width, 0, tilemap.height);
+		loader.loadEntities(entityCreator, "entidades");	
 		
-		loader.loadEntities(entityCreator, "entidades");
-		
+		add(tilemap2);
+		add(tilemap);
+		player = new Player(10,100);
+		add(player);
+	
 		Reg.powerUpGroup.add(new PowerUp(10,30));
 		Reg.powerUpGroup.add(new PowerUp(50,30));
 		Reg.powerUpGroup.add(new PowerUp(100,30));
@@ -88,11 +90,14 @@ class PlayState extends FlxState
 		
 		add(Reg.powerUpGroup);
 		add(Reg.enemiesGroup);
+		add(Reg.bossDisparoGroup);
+		add(boss);
 		
 	}
 
 	override public function update(elapsed:Float):Void
 	{
+
 		super.update(elapsed);
 		FlxG.camera.scroll.x += 1;
 		spawnEnemies();
@@ -105,25 +110,26 @@ class PlayState extends FlxState
 				Reg.enemiesGroup.members[l].destroy();
 			
 			}
-			if (FlxG.collide(Reg.enemiesGroup.members[l], player))
-			{
-			trace("choco con enemigo"+l);
-			player.destroy();
-			}
+			else if (Reg.enemiesGroup.members[l].alive)
+				{
+					if (FlxG.pixelPerfectOverlap(Reg.enemiesGroup.members[l], player))
+						player.perder();
+				}
 		}
-		//if (FlxG.overlap(Reg.enemiesGroup, player))
-		//{
-			//trace("choco con enemigo");
-			//player.destroy();
-		//}
+		
 		if (FlxG.collide(tilemap, player))
+			player.perder();
+		for (m in 0...Reg.bossDisparoGroup.length) 
 		{
-			trace("choco con tilemap");
-			player.destroy();
+			if (FlxG.pixelPerfectOverlap(Reg.bossDisparoGroup.members[m], player))
+			{
+				player.perder(); 
+				trace("perdio");
+			}
 		}
 		for (i in 0...Reg.disparoGroup.length)
 			if (FlxG.collide(tilemap, Reg.disparoGroup.members[i]))
-				Reg.disparoGroup.members[i].destroy();
+				Reg.disparoGroup.members[i].kill();
 		for (i in 0...Reg.disparoGroup.length)
 		{
 			for (j in 0...Reg.enemyDisparoGroup.length)
@@ -142,10 +148,11 @@ class PlayState extends FlxState
 		{
 			for (j in 0...Reg.enemiesGroup.length) 
 			{
-				if (FlxG.collide(Reg.disparoGroup.members[i], Reg.enemiesGroup.members[j]))
+				if (FlxG.overlap(Reg.disparoGroup.members[i], Reg.enemiesGroup.members[j]))
 				{
 					Reg.disparoGroup.members[i].destroy();
-					Reg.enemiesGroup.members[j].destroy();
+					Reg.enemiesGroup.members[j].leDispararon();
+					Reg.enemiesGroup.members[j].kill();
 				}
 			}
 		}
@@ -157,5 +164,8 @@ class PlayState extends FlxState
 				player.agarroPowerUp();
 			}
 		}
+		if (player.checkPerdio())
+			trace("gameover");
+		
 	}
 }

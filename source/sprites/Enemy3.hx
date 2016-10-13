@@ -12,6 +12,7 @@ class Enemy3 extends BaseEnemies
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{
 		super(X, Y, SimpleGraphic);
+		makeGraphic(16, 16);
 		loadGraphic(AssetPaths.Tortuga__png, true, 32, 32);
 		animation.add("idle", [0, 1], 4, true);
 		animation.play("idle");
@@ -19,14 +20,13 @@ class Enemy3 extends BaseEnemies
 	override public function move() 
 	{
 		super.move();
-		
-		if (y > Reg.posYplayer)
+		x -= 0.5;
+		if (y + height/2 > Reg.posYplayer && y < Reg.posYplayer+Reg.heightPlayer)
+			x -= 1.5;
+		else if (y > Reg.posYplayer)
 			y--;
 		else if (y < Reg.posYplayer)
 			y++;
-		if (y == Reg.posYplayer)
-			x -= 2;
-		else
-		 x-= 0.5;
+
 	}
 }

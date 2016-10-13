@@ -7,30 +7,23 @@ import flixel.FlxG;
  * ...
  * @author ...
  */
-class BaseEnemies extends FlxSprite
+class Barriles extends FlxSprite
 {
-	private var killed:Bool;
+
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{
 		super(X, Y, SimpleGraphic);
-		killed = false;
-		kill();
+		//makeGraphic(18, 22,0xFF00FF00);
+		loadGraphic(AssetPaths.Barril__png, false, 18, 22);
 	}
-	override public function update(elapsed:Float):Void
+	override public function update(elapsed:Float):Void 
 	{
-		move();
+		super.update(elapsed);
+		velocity.x = -60;
+		angle += 5;
 		if (this.x > (FlxG.camera.scroll.x + FlxG.camera.width + this.width*2) && this.alive)
 			kill();
 		else if (this.x < (FlxG.camera.scroll.x - this.width * 2) && this.alive)
 			kill();
-	}
-	public function move(){};
-	public function leDispararon():Void
-	{
-		killed = true;
-	}
-	public function checkKilled():Bool
-	{
-		return killed;
 	}
 }

@@ -17,7 +17,7 @@ class Player extends FlxSprite
 	private var speed:Int = 100;
 	private var shield:Escudo ;
 	private var vidasShield:Int = 2;
-	
+	private var perdio:Bool;
 	
 	public function getShield():Escudo
 	{
@@ -32,11 +32,22 @@ class Player extends FlxSprite
 	{
 		powerUpAcumulado++;
 	}
+	public function perder():Void
+	{
+		perdio = true;
+		Reg.vidas = 3;
+	}
+	public function checkPerdio():Bool
+	{
+		return perdio;
+	}
 	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
 	{
 		super(X, Y, SimpleGraphic);
-		loadGraphic(AssetPaths.NewPiskel__png);
+		//loadGraphic(AssetPaths.NewPiskel__png);
+		makeGraphic(10, 10);
 		
+		perdio = false;
 		puedeDisparar = true;
 		counterDisparos = 0;
 		
