@@ -1,5 +1,6 @@
 package states;
 
+import flash.media.Video;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
@@ -32,11 +33,14 @@ class PlayState extends FlxState
 	private var fondo:FlxSprite;
 	private var boss:Boss;
 	private var textoScore:FlxText;
+	private var disparoAux:Disparo;
 	
 	private function hudUpdate():Void
 	{
 		textoScore.text = Std.string(Reg.score);
 		textoScore.x += 1;
+		
+		
 	}
 	
 	
@@ -78,8 +82,8 @@ class PlayState extends FlxState
 	{
 		super.create();
 		
+		Reg.spawnDisparos();
 		Reg.enemiesGroup = new FlxTypedGroup<BaseEnemies>();
-		Reg.disparoGroup = new FlxTypedGroup<Disparo>();
 		Reg.enemyDisparoGroup = new FlxTypedGroup<EnemyDisparo>();
 		Reg.bossDisparoGroup = new FlxTypedGroup<Barriles>();
 		Reg.powerUpGroup = new FlxTypedGroup<PowerUp>();
@@ -128,12 +132,25 @@ class PlayState extends FlxState
 		
 	}
 
+	public function DisparoCollision():Void
+	{
+	
+	}
+	
 	override public function update(elapsed:Float):Void
 	{
 
 		super.update(elapsed);
-		FlxG.camera.scroll.x += 1;
+		
+		
+		FlxG.camera.scroll.x += 1; 
+		
+		
+		
+		
 		spawnEnemies();
+		
+		
 		
 		for (l in 0...Reg.enemiesGroup.length) 
 		{
@@ -162,32 +179,56 @@ class PlayState extends FlxState
 		//}
 		for (i in 0...Reg.disparoGroup.length)
 			if (FlxG.collide(tilemap, Reg.disparoGroup.members[i]))
+			{
+				//disparoAux = Reg.disparoGroup.members[i];
+				//Reg.disparoGroup.remove(Reg.disparoGroup.members[i]);
+				//disparoAux.destroy();
 				Reg.disparoGroup.members[i].kill();
+			}
 		for (i in 0...Reg.disparoGroup.length)
 		{
 			for (j in 0...Reg.enemyDisparoGroup.length)
 			{
 				if (FlxG.collide(Reg.disparoGroup.members[i], Reg.enemyDisparoGroup.members[j]))
 				{	
-					Reg.disparoGroup.members[i].destroy();
+					
+					//disparoAux = Reg.disparoGroup.members[i];
+					//Reg.disparoGroup.remove(Reg.disparoGroup.members[i]);
+					//disparoAux.destroy();
+					Reg.disparoGroup.members[i].kill();
 					Reg.enemyDisparoGroup.members[j].destroy();
 				}
 			}
 		}
 		for (i in 0...Reg.enemyDisparoGroup.length)
+		{
 			if (FlxG.collide(tilemap, Reg.enemyDisparoGroup.members[i]))
 				Reg.enemyDisparoGroup.members[i].destroy();
+		}
 		for (i in 0...Reg.disparoGroup.length) 
 		{
 			for (j in 0...Reg.enemiesGroup.length) 
 			{
 				if (FlxG.overlap(Reg.disparoGroup.members[i], Reg.enemiesGroup.members[j]))
 				{
-					Reg.disparoGroup.members[i].destroy();
+					//disparoAux = Reg.disparoGroup.members[i];
+					//Reg.disparoGroup.remove                     (Reg.disparoGroup.members[i]);
+					//disparoAux.destroy();
+					Reg.disparoGroup.members[i].kill();
 					Reg.enemiesGroup.members[j].leDispararon();
 					Reg.enemiesGroup.members[j].kill();
 					Reg.score += 30;
 				}
+			}
+		}
+		for (k in 0...Reg.disparoGroup.length) 
+		{
+			if (Reg.disparoGroup.members[k].x > FlxG.camera.scroll.x + FlxG.camera.width) 
+			{
+					//disparoAux = Reg.disparoGroup.members[k];
+					//Reg.disparoGroup.remove(Reg.disparoGroup.members[k]);
+					//disparoAux.destroy();
+					Reg.disparoGroup.members[k].kill();
 			}
 		}
 		//for (k in 0...Reg.powerUpGroup.length) 
@@ -199,6 +240,7 @@ class PlayState extends FlxState
 			//}
 		//}
 		hudUpdate();
+		trace(Reg.disparoGroup.length);
 		if (player.getVidas() == 0)
 			{
 				gameOver();

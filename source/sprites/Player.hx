@@ -10,7 +10,7 @@ import flixel.FlxG;
  */
 class Player extends FlxSprite
 {
-	private var vidas:Int = 3;
+	private var vidas:Int = 99;
 	private var puedeDisparar:Bool;
 	private var counterDisparos:Int;
 	private var powerUpAcumulado:Int;
@@ -97,9 +97,14 @@ class Player extends FlxSprite
 		{
 			if (FlxG.keys.pressed.SPACE && puedeDisparar)
 			{ 
-				Reg.disparoGroup.add(new Disparo(1,this.x + width, this.y + height/2));
-				if(misil)	
-					Reg.disparoGroup.add(new Disparo(2,this.x + width/2, this.y + height/2));				
+				Reg.disparoGroup.getFirstAvailable().reviveCopado(1);
+				
+				//Reg.disparoGroup.add(new Disparo(1, this.x + width, this.y + height / 2));
+				
+				
+				if (misil)	
+					Reg.disparoGroup.getFirstAvailable().reviveCopado(2);
+					//Reg.disparoGroup.add(new Disparo(2,this.x + width/2, this.y + height/2));				
 				puedeDisparar = false;
 				counterDisparos = 0;						
 			}

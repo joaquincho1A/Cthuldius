@@ -70,7 +70,7 @@ class Boss extends FlxSprite
 		{
 			if (FlxG.overlap(this, Reg.disparoGroup.members[i]))
 			{
-				Reg.disparoGroup.members[i].destroy();
+				Reg.disparoGroup.members[i].kill();
 				vida--;
 			}
 		}

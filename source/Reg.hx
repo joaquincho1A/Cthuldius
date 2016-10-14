@@ -37,4 +37,13 @@ class Reg
 		else
 			return false;
 	}
+	static public function spawnDisparos():Void
+	{
+		disparoGroup = new FlxTypedGroup<Disparo>();
+		for (i in 0...10) 
+		{
+			disparoGroup.add(new Disparo());
+			disparoGroup.members[i].kill();
+		}
+	}
 }

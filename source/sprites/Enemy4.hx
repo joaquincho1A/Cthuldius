@@ -42,7 +42,6 @@ class Enemy4 extends BaseEnemies
 			FlxG.state.add(Reg.enemyDisparoGroup);
 			etapa = 1;
 		}
-		
 		if (movimiento == 50 && etapa == 1)
 		{
 			etapa++;
