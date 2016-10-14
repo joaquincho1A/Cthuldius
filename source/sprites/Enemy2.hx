@@ -38,4 +38,5 @@ class Enemy2 extends BaseEnemies
 			movimiento = 0;
 		}
 	}
+
 }

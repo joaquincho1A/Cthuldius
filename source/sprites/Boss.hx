@@ -78,6 +78,7 @@ class Boss extends FlxSprite
 		{	
 			vencido = true;
 			kill();
+			Reg.score += 1000;
 		}
 	}
 	public function getVencido():Bool

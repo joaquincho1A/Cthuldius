@@ -17,6 +17,12 @@ import flixel.addons.editors.ogmo.FlxOgmoLoader;
 import flixel.tile.FlxTilemap;
 import flixel.FlxObject;
 import sprites.PowerUp;
+import flixel.group.FlxGroup.FlxTypedGroup;
+import sprites.BaseEnemies;
+import sprites.Disparo;
+import sprites.EnemyDisparo;
+import sprites.Barriles;
+
 
 class PlayState extends FlxState
 {
@@ -24,8 +30,15 @@ class PlayState extends FlxState
 	private var tilemap2:FlxTilemap;
 	private var player:Player;
 	private var fondo:FlxSprite;
-	private var aux:FlxSprite;
 	private var boss:Boss;
+	private var textoScore:FlxText;
+	
+	private function hudUpdate():Void
+	{
+		textoScore.text = Std.string(Reg.score);
+		textoScore.x += 1;
+	}
+	
 	
 	private function entityCreator(name:String, data:Xml):Void
 	{
@@ -46,7 +59,6 @@ class PlayState extends FlxState
 					boss = new Boss(startX, startY);
 		}
 	}
-	
 	private function spawnEnemies():Void
 	{
 		for (i in 0...Reg.enemiesGroup.length) 
@@ -65,6 +77,18 @@ class PlayState extends FlxState
 	override public function create():Void
 	{
 		super.create();
+		
+		Reg.enemiesGroup = new FlxTypedGroup<BaseEnemies>();
+		Reg.disparoGroup = new FlxTypedGroup<Disparo>();
+		Reg.enemyDisparoGroup = new FlxTypedGroup<EnemyDisparo>();
+		Reg.bossDisparoGroup = new FlxTypedGroup<Barriles>();
+		Reg.powerUpGroup = new FlxTypedGroup<PowerUp>();
+		
+		
+		
+		
+		
+		Reg.score = 0;
 		var loader:FlxOgmoLoader = new FlxOgmoLoader(AssetPaths.oceantile__oel);
 		tilemap = loader.loadTilemap(AssetPaths.Oceantileset__png, 16, 16, "tileset");
 		tilemap2 = loader.loadTilemap(AssetPaths.fondo__png, 75, 240, "fondo");
@@ -97,13 +121,18 @@ class PlayState extends FlxState
 		add(Reg.disparoGroup);
 		add(boss);
 		
+		
+		textoScore = new FlxText(10, 100);
+		textoScore.text =Std.string(Reg.score);
+		add(textoScore);
+		
 	}
 
 	override public function update(elapsed:Float):Void
 	{
 
 		super.update(elapsed);
-		//FlxG.camera.scroll.x += 1;
+		FlxG.camera.scroll.x += 1;
 		spawnEnemies();
 		
 		for (l in 0...Reg.enemiesGroup.length) 
@@ -157,6 +186,7 @@ class PlayState extends FlxState
 					Reg.disparoGroup.members[i].destroy();
 					Reg.enemiesGroup.members[j].leDispararon();
 					Reg.enemiesGroup.members[j].kill();
+					Reg.score += 30;
 				}
 			}
 		}
@@ -168,10 +198,29 @@ class PlayState extends FlxState
 				//player.agarroPowerUp();
 			//}
 		//}
+		hudUpdate();
 		if (player.getVidas() == 0)
 			{
-				FlxG.switchState(new MenuState());
+				gameOver();
 			}
+	}
+	private function gameOver():Void
+	{
+		tilemap.destroy();
+		tilemap2.destroy();
+		player.destroy();
+		//fondo.destroy();
+		boss.destroy();
+		textoScore.destroy();
 		
+		Reg.disparoGroup.destroy();
+		Reg.enemiesGroup.destroy();
+		Reg.enemyDisparoGroup.destroy();
+		Reg.bossDisparoGroup.destroy();
+		Reg.powerUpGroup.destroy();
+		
+	
+		
+		FlxG.switchState(new MenuState());
 	}
 }

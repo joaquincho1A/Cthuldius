@@ -29,4 +29,5 @@ class Enemy3 extends BaseEnemies
 			y++;
 
 	}
+
 }

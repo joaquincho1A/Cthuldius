@@ -19,13 +19,13 @@ class Reg
 	static public var widthPlayer:Float;
 	static public var heightPlayer:Float;
 	static public var score:Int;
-	static public var highScore:Int;
+	static public var highScore:Int = 0;
 	
-	static public var disparoGroup:FlxTypedGroup<Disparo> = new FlxTypedGroup<Disparo>();
-	static public var enemiesGroup:FlxTypedGroup<BaseEnemies> = new FlxTypedGroup<BaseEnemies>();
-	static public var enemyDisparoGroup:FlxTypedGroup<EnemyDisparo> = new FlxTypedGroup<EnemyDisparo>();
-	static public var bossDisparoGroup:FlxTypedGroup<Barriles> = new FlxTypedGroup<Barriles>();
-	static public var powerUpGroup:FlxTypedGroup<PowerUp> = new FlxTypedGroup<PowerUp>();
+	static public var disparoGroup:FlxTypedGroup<Disparo>; /*= new FlxTypedGroup<Disparo>();*/
+	static public var enemiesGroup:FlxTypedGroup<BaseEnemies>;  /*= new FlxTypedGroup<BaseEnemies>();*/
+	static public var enemyDisparoGroup:FlxTypedGroup<EnemyDisparo>; /*= new FlxTypedGroup<EnemyDisparo>();*/
+	static public var bossDisparoGroup:FlxTypedGroup<Barriles>; /*= new FlxTypedGroup<Barriles>();*/
+	static public var powerUpGroup:FlxTypedGroup<PowerUp>; /*= new FlxTypedGroup<PowerUp>();*/
 	
 	static public function checkHighScore():Bool
 	{

@@ -72,7 +72,7 @@ class Player extends FlxSprite
 	}
 	override public function update(elapsed:Float):Void
 	{
-		//x += 1;
+		x += 1;
 		Reg.posXplayer = x+width/2;
 		Reg.posYplayer = y+height/2;
 		super.update(elapsed);
@@ -169,7 +169,6 @@ class Player extends FlxSprite
 	{
 		for (i in 0...Reg.enemiesGroup.length) 
 		{
-		
 			if (Reg.enemiesGroup.members[i].alive)
 			{
 				if (FlxG.pixelPerfectOverlap(Reg.enemiesGroup.members[i], this))
@@ -193,6 +192,7 @@ class Player extends FlxSprite
 			{
 				Reg.powerUpGroup.members[k].destroy();
 				agarroPowerUp();
+				Reg.score += 50;
 			}
 		}		
 	}

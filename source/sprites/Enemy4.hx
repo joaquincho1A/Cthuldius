@@ -59,4 +59,5 @@ class Enemy4 extends BaseEnemies
 		}
 		
 	}
+
 }
